@@ -12,6 +12,9 @@
         Z (int \Z)]
     (map char (range A Z))))
 
+(defn number-of-lines [ch]
+  (+ 1 (* 2 (- (int ch) (int \A)))))
+
 (defspec produces-some-lines
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
@@ -21,4 +24,9 @@
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
                        (= (count (create v))
-                          (+ 1 (* 2 (- (int v) (int \A)))))))
+                          (number-of-lines v))))
+
+(defspec the-length-of-each-line-is-equal-to-the-total-number-of-lines
+         100
+         (prop/for-all [v (gen/elements upper-case-chars)]
+                       (every? #(= (count %) (number-of-lines v)) (create v))))
