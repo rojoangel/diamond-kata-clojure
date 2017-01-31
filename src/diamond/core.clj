@@ -8,4 +8,4 @@
   (inc (* 2 (char->int ch))))
 
 (defn create [ch]
-  (repeat (line-count ch) "A"))
+  (repeat (line-count ch) (repeat (line-count ch) \A)))
