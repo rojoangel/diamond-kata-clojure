@@ -2,4 +2,4 @@
   (:gen-class))
 
 (defn create [str]
-  nil)
+  "A")
