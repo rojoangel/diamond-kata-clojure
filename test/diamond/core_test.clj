@@ -15,11 +15,6 @@
 (defn number-of-lines [ch]
   (+ 1 (* 2 (- (int ch) (int \A)))))
 
-(defspec produces-some-lines
-         100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (> (count (create v)) 0)))
-
 (defspec produces-the-expected-number-of-lines
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
