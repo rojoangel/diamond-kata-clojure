@@ -1,7 +1,7 @@
 (ns diamond.core
   (:gen-class))
 
-(defn- char->int [ch]
+(defn char->int [ch]
   (- (int ch) (int \A)))
 
 (defn square-side [ch]
