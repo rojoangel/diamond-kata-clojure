@@ -12,16 +12,14 @@
         Z (int \Z)]
     (map char (range A Z))))
 
-(defn number-of-lines [ch]
-  (+ 1 (* 2 (- (int ch) (int \A)))))
+(defspec produces-a-square
+         100
+         (prop/for-all [v (gen/elements upper-case-chars)]
+                       (every? #(= (count %) (square-side v)) (create v))))
 
-(defspec produces-the-expected-number-of-lines
+(defspec produces-a-square-of-the-appropriate-size
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
                        (= (count (create v))
-                          (number-of-lines v))))
+                          (square-side v))))
 
-(defspec the-length-of-each-line-is-equal-to-the-total-number-of-lines
-         100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (every? #(= (count %) (number-of-lines v)) (create v))))

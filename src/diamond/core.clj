@@ -4,7 +4,7 @@
 (defn- char->int [ch]
   (- (int ch) (int \A)))
 
-(defn- square-side [ch]
+(defn square-side [ch]
   (inc (* 2 (char->int ch))))
 
 (defn create [ch]
