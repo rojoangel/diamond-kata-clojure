@@ -4,8 +4,8 @@
 (defn- char->int [ch]
   (- (int ch) (int \A)))
 
-(defn- line-count [ch]
+(defn- square-side [ch]
   (inc (* 2 (char->int ch))))
 
 (defn create [ch]
-  (repeat (line-count ch) (repeat (line-count ch) \A)))
+  (repeat (square-side ch) (repeat (square-side ch) \A)))
