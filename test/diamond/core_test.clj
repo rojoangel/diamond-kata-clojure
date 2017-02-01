@@ -45,7 +45,6 @@
 (defspec is-vertically-symmetrical
          100
          (prop/for-all [ch (gen/elements upper-case-chars)]
-                       (let [diamond (create ch)
-                             top-half (first-half diamond)
-                             bottom-half (second-half diamond)]
-                         (= top-half (reverse bottom-half)))))
+                       (let [diamond (create ch)]
+                         (= (first-half diamond)
+                            (reverse (second-half diamond))))))
