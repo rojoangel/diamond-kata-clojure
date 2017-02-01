@@ -60,13 +60,13 @@
          100
          (prop/for-all [ch (gen/elements upper-case-chars)]
                        (let [diamond (create ch)
-                             right-half (map second-half diamond)]
+                             top-right-half (first-half (map second-half diamond))]
                          (and
                            (every?
                              ;; checking that it is not a \space, since the value is verified by single-letter-per-line
-                             (fn [[idx line]] (not (= (nth right-half idx) \space)))
-                             (map-indexed vector right-half))
+                             (fn [[idx line]] (not (= (nth top-right-half idx) \space)))
+                             (map-indexed vector top-right-half))
                            (every?
                              ;; checking number of \space's
                              (fn [line] (= (dec (count line)) (get (frequencies line) \space)))
-                             right-half)))))
+                             top-right-half)))))
