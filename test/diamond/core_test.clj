@@ -54,7 +54,7 @@
          (prop/for-all [ch (gen/elements upper-case-chars)]
                        (let [diamond (create ch)]
                          (= (map first-half diamond)
-                            (reverse (map second-half diamond))))))
+                            (map (comp reverse second-half) diamond)))))
 
 (defspec letter-is-in-the-righ-position-in-a-line-filled-with-spaces
          100
