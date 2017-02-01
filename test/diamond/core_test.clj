@@ -13,6 +13,9 @@
   (let [A (int \A)]
     (char (+ idx A))))
 
+(defn first-half [col]
+  (take (quot (inc (count col)) 2) col))
+
 (defspec produces-a-square
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
@@ -27,12 +30,13 @@
 (defspec single-letter-per-line
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [top-half (take (inc (char->int v)) (create v))]
-                         (every? (fn [[idx line]] (set/subset? (set line) #{\space (int->char idx)})) (map-indexed vector top-half)))))
+                       (every?
+                         (fn [[idx line]] (set/subset? (set line) #{\space (int->char idx)}))
+                         (map-indexed vector (first-half (create v))))))
 
 (defspec is-vertically-symmetrical
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [top-half (take (inc (char->int v)) (create v))
+                       (let [top-half (first-half (create v))
                              bottom-half (drop (char->int v) (create v))]
                          (= top-half (reverse bottom-half)))))
