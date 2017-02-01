@@ -48,3 +48,10 @@
                        (let [diamond (create ch)]
                          (= (first-half diamond)
                             (reverse (second-half diamond))))))
+
+(defspec is-horizontally-symmetrical
+         100
+         (prop/for-all [ch (gen/elements upper-case-chars)]
+                       (let [diamond (create ch)]
+                         (= (map first-half diamond)
+                            (reverse (map second-half diamond))))))
