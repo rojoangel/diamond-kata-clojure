@@ -14,10 +14,12 @@
     (char (+ idx A))))
 
 (defn first-half [col]
-  (take (quot (inc (count col)) 2) col))
+  (let [size (quot (inc (count col)) 2)]
+    (take size col)))
 
 (defn second-half [col]
-  (drop (quot (count col) 2) col))
+  (let [size (quot (count col) 2)]
+    (drop size col)))
 
 (defspec produces-a-square
          100
