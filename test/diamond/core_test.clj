@@ -68,5 +68,5 @@
                              (map-indexed vector top-right-half))
                            (every?
                              ;; checking number of \space's
-                             (fn [line] (= (dec (count line)) (get (frequencies line) \space)))
+                             (fn [line] (= (dec (count line)) (get (frequencies line) \space 0)))
                              top-right-half)))))
