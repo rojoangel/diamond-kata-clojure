@@ -16,6 +16,9 @@
 (defn first-half [col]
   (take (quot (inc (count col)) 2) col))
 
+(defn second-half [col]
+  (drop (quot (count col) 2) col))
+
 (defspec produces-a-square
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
@@ -38,5 +41,5 @@
          100
          (prop/for-all [v (gen/elements upper-case-chars)]
                        (let [top-half (first-half (create v))
-                             bottom-half (drop (char->int v) (create v))]
+                             bottom-half (second-half (create v))]
                          (= top-half (reverse bottom-half)))))
