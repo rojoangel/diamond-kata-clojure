@@ -1,6 +1,11 @@
 (ns diamond.core
   (:gen-class))
 
+(def upper-case-chars
+  (let [A (int \A)
+        Z (int \Z)]
+    (map char (range A (inc Z)))))
+
 (defn char->int [ch]
   (- (int ch) (int \A)))
 
