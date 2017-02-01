@@ -64,7 +64,7 @@
                          (and
                            (every?
                              ;; checking that it is not a \space, since the value is verified by single-letter-per-line
-                             (fn [[idx line]] (not (= (nth top-right-half idx) \space)))
+                             (fn [[idx line]] (not (= (nth line idx) \space)))
                              (map-indexed vector top-right-half))
                            (every?
                              ;; checking number of \space's
