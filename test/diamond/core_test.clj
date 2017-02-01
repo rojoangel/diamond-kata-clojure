@@ -23,29 +23,29 @@
 
 (defspec produces-a-square
          100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [diamond (create v)]
-                         (every? #(= (count %) (square-side v)) diamond))))
+         (prop/for-all [ch (gen/elements upper-case-chars)]
+                       (let [diamond (create ch)]
+                         (every? #(= (count %) (square-side ch)) diamond))))
 
 (defspec produces-a-square-of-the-appropriate-size
          100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [diamond (create v)]
+         (prop/for-all [ch (gen/elements upper-case-chars)]
+                       (let [diamond (create ch)]
                          (= (count diamond)
-                            (square-side v)))))
+                            (square-side ch)))))
 
 (defspec single-letter-per-line
          100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [diamond (create v)]
+         (prop/for-all [ch (gen/elements upper-case-chars)]
+                       (let [diamond (create ch)]
                          (every?
                            (fn [[idx line]] (set/subset? (set line) #{\space (int->char idx)}))
                            (map-indexed vector (first-half diamond))))))
 
 (defspec is-vertically-symmetrical
          100
-         (prop/for-all [v (gen/elements upper-case-chars)]
-                       (let [diamond (create v)
+         (prop/for-all [ch (gen/elements upper-case-chars)]
+                       (let [diamond (create ch)
                              top-half (first-half diamond)
                              bottom-half (second-half diamond)]
                          (= top-half (reverse bottom-half)))))
