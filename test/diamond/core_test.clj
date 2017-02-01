@@ -8,10 +8,6 @@
             [clojure.test.check.properties :as prop]
             [clojure.test.check.clojure-test :refer [defspec]]))
 
-(def upper-case-chars
-  (let [A (int \A)
-        Z (int \Z)]
-    (map char (range A Z))))
 
 (defn int->char [idx]
   (let [A (int \A)]

@@ -13,4 +13,4 @@
   (inc (* 2 (char->int ch))))
 
 (defn create [ch]
-  (repeat (square-side ch) (repeat (square-side ch) \A)))
+  (take (square-side ch) (map (partial repeat (square-side ch)) (cycle upper-case-chars))))
