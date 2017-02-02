@@ -34,13 +34,13 @@
                          (= (count diamond)
                             (square-side ch)))))
 
-(defspec single-letter-per-line
+(defspec the-right-letter-in-the-righ-position
          100
          (prop/for-all [ch (gen/elements upper-case-chars)]
                        (let [diamond (create ch)]
                          (every?
-                           (fn [[idx line]] (set/subset? (set line) #{\space (int->char idx)}))
-                           (map-indexed vector (first-half diamond))))))
+                           (fn [[idx line]] (= (nth line idx) (int->char idx)))
+                           (map-indexed vector (map second-half (first-half diamond)))))))
 
 (defspec is-vertically-symmetrical
          100
