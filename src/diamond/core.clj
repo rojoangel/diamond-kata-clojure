@@ -12,15 +12,10 @@
 (defn square-side [ch]
   (inc (* 2 (char->int ch))))
 
-(defn half-square-side [ch]
-  (/ (inc (square-side ch)) 2))
-
-(defn half-square-row [ch]
-  (take (half-square-side ch) upper-case-chars))
-
 (defn square-row [ch]
-  (let [half-row (half-square-row ch)]
-    (concat (reverse (drop 1 half-row)) half-row)))
+  (let [half-square-side (/ (inc (square-side ch)) 2)
+        half-square-row (take half-square-side upper-case-chars)]
+    (concat (reverse (drop 1 half-square-row)) half-square-row)))
 
 (defn create [ch]
   (repeat (square-side ch) (square-row ch)))
