@@ -56,17 +56,12 @@
                          (= (map first-half diamond)
                             (map (comp reverse second-half) diamond)))))
 
-(defspec letter-is-in-the-righ-position-in-a-line-filled-with-spaces
+(defspec line-filled-with-spaces
          100
          (prop/for-all [ch (gen/elements upper-case-chars)]
                        (let [diamond (create ch)
                              top-right-half (first-half (map second-half diamond))]
-                         (and
-                           (every?
-                             ;; checking that it is not a \space, since the value is verified by single-letter-per-line
-                             (fn [[idx line]] (not (= (nth line idx) \space)))
-                             (map-indexed vector top-right-half))
-                           (every?
-                             ;; checking number of \space's
-                             (fn [line] (= (dec (count line)) (get (frequencies line) \space 0)))
-                             top-right-half)))))
+                         (every?
+                           ;; checking number of \space's
+                           (fn [line] (= (dec (count line)) (get (frequencies line) \space 0)))
+                           top-right-half))))
