@@ -13,7 +13,7 @@
   (inc (* 2 (char->int ch))))
 
 (defn- mirror [coll]
-  (concat (reverse (drop 1 coll)) coll))
+  (concat (reverse (rest coll)) coll))
 
 (defn- half-square-side [ch]
   (quot (inc (square-side ch)) 2))
