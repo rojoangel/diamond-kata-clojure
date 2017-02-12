@@ -10,6 +10,10 @@
   (let [size (inc (quot (count diamond) 2))]
     (take size diamond)))
 
+(defn second-half [diamond]
+  (let [size (inc (quot (count diamond) 2))]
+    (take size diamond)))
+
 (defn- int->char [idx]
   (let [A-idx (int \A)]
     (char (+ idx A-idx))))
@@ -37,3 +41,11 @@
                          (every?
                            (fn [[idx line]] (some #(= (int->char idx) %) line))
                            (map-indexed vector top-diamond)))))
+
+(defspec is-symmetrical-on-the-horizontal-plane             ;; the name of the test
+         100                                                ;; the number of iterations for test.check to test
+         (prop/for-all [char (gen/elements upper-case-chars)]
+                       (let [diamond (create char)
+                             top-diamond (first-half diamond)
+                             bottom-diamond (second-half diamond)]
+                         (= top-diamond (reverse bottom-diamond)))))
