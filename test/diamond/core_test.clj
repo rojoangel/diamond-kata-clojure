@@ -6,7 +6,7 @@
             [clojure.test.check.clojure-test :refer [defspec]]
             [clojure.string :as str]))
 
-(defn upper-case-chars []
+(def upper-case-chars
   (let [A (int \A)
         Z (int \Z)]
     (map char (range A Z))))
@@ -21,14 +21,14 @@
 
 (defspec produces-a-square                                  ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
-         (prop/for-all [char (gen/elements (upper-case-chars))]
+         (prop/for-all [char (gen/elements upper-case-chars)]
                        (let [diamond (create char)
                              rows (count diamond)]
                          (every? #(= rows (count %)) diamond))))
 
 (defspec the-square-has-the-right-size                      ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
-         (prop/for-all [char (gen/elements (upper-case-chars))]
+         (prop/for-all [char (gen/elements upper-case-chars)]
                        (let [diamond (create char)
                              square-side (square-side char)]
                          (= (count diamond) square-side))))
@@ -36,7 +36,7 @@
 ;; start leveraging horizontal symmetry
 (defspec each-row-contains-the-right-character              ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
-         (prop/for-all [char (gen/elements (upper-case-chars))]
+         (prop/for-all [char (gen/elements upper-case-chars)]
                        (let [diamond (create char)
                              top-diamond (first-half diamond)]
                          (every?
