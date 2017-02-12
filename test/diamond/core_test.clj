@@ -6,11 +6,6 @@
             [clojure.test.check.clojure-test :refer [defspec]]
             [clojure.string :as str]))
 
-(def upper-case-chars
-  (let [A (int \A)
-        Z (int \Z)]
-    (map char (range A Z))))
-
 (defn- first-half [diamond]
   (let [size (inc (quot (count diamond) 2))]
     (take size diamond)))
