@@ -20,9 +20,15 @@
 (defn- mirror [coll]
   (concat (reverse (rest coll)) coll))
 
+(defn- replace-other-chars-with-spaces [char coll]
+  (map #(if (= char %) char \space) coll))
+
 (defn- diamond-row [char]
   (mirror (take (half-square-side char) upper-case-chars)))
 
 (defn create [char]
   (let [half-square-side (half-square-side char)]
-    (mirror (repeat half-square-side (diamond-row char)))))
+    (mirror
+      (reverse
+        (map replace-other-chars-with-spaces upper-case-chars
+             (repeat half-square-side (diamond-row char)))))))
