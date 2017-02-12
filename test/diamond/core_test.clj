@@ -11,8 +11,9 @@
         Z (int \Z)]
     (map char (range A Z))))
 
-(defspec produces-some-lines                                ;; the name of the test
+(defspec produces-a-square                                  ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
          (prop/for-all [char (gen/elements (upper-case-chars))]
-                       (let [diamond (create char)]
-                         (> (count diamond) 0))))
+                       (let [diamond (create char)
+                             rows (count diamond)]
+                         (every? #(= rows (count %)) diamond))))
