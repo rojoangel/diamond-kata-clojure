@@ -2,4 +2,4 @@
   (:gen-class))
 
 (defn create [char]
-  (cons char nil))
+  (cons (cons \A nil) nil))
