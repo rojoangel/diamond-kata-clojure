@@ -10,9 +10,9 @@
   (let [size (inc (quot (count diamond) 2))]
     (take size diamond)))
 
-(defn second-half [diamond]
+(defn- second-half [diamond]
   (let [size (inc (quot (count diamond) 2))]
-    (take size diamond)))
+    (reverse (take size (reverse diamond)))))
 
 (defn- int->char [idx]
   (let [A-idx (int \A)]
