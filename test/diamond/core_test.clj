@@ -33,14 +33,14 @@
                          (= (count diamond) square-side))))
 
 ;; start leveraging horizontal symmetry
-(defspec each-row-contains-the-right-character              ;; the name of the test
+(defspec each-row-contains-the-right-character-in-the-right-place ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
          (prop/for-all [char (gen/elements upper-case-chars)]
                        (let [diamond (create char)
-                             top-diamond (first-half diamond)]
+                             top-right-diamond (map second-half (first-half diamond))]
                          (every?
-                           (fn [[idx line]] (some #(= (int->char idx) %) line))
-                           (map-indexed vector top-diamond)))))
+                           (fn [[idx line]] (= (int->char idx) (nth line idx)))
+                           (map-indexed vector top-right-diamond)))))
 
 (defspec is-symmetrical-on-the-horizontal-plane             ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
