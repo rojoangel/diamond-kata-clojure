@@ -14,6 +14,12 @@
 (defn square-side [char]
   (+ 1 (* (char->int char) 2)))
 
+(defn- half-square-side [char]
+  (inc (quot (square-side char) 2)))
+
+(defn mirror [coll]
+  (concat (reverse (rest coll)) coll))
+
 (defn create [char]
   (let [square-side (square-side char)]
-    (repeat square-side (take square-side (cycle upper-case-chars)))))
+    (repeat square-side (mirror (take (half-square-side char) upper-case-chars)))))
