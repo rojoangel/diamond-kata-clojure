@@ -17,9 +17,12 @@
 (defn- half-square-side [char]
   (inc (quot (square-side char) 2)))
 
-(defn mirror [coll]
+(defn- mirror [coll]
   (concat (reverse (rest coll)) coll))
 
+(defn- diamond-row [char]
+  (mirror (take (half-square-side char) upper-case-chars)))
+
 (defn create [char]
-  (let [square-side (square-side char)]
-    (repeat square-side (mirror (take (half-square-side char) upper-case-chars)))))
+  (let [half-square-side (half-square-side char)]
+    (mirror (repeat half-square-side (diamond-row char)))))
