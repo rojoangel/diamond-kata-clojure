@@ -49,3 +49,11 @@
                              top-diamond (first-half diamond)
                              bottom-diamond (second-half diamond)]
                          (= top-diamond (reverse bottom-diamond)))))
+
+(defspec is-symmetrical-on-the-vertical-plane               ;; the name of the test
+         100                                                ;; the number of iterations for test.check to test
+         (prop/for-all [char (gen/elements upper-case-chars)]
+                       (let [diamond (create char)
+                             left-diamond (map first-half diamond)
+                             right-diamond (map second-half diamond)]
+                         (= left-diamond (map reverse right-diamond)))))
