@@ -14,4 +14,5 @@
 (defspec produces-some-lines                                ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
          (prop/for-all [char (gen/elements (upper-case-chars))]
-                       (> (count (create char)) 0)))
+                       (let [diamond (create char)]
+                         (> (count diamond) 0))))
