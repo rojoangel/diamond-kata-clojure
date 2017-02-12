@@ -6,7 +6,12 @@
             [clojure.test.check.clojure-test :refer [defspec]]
             [clojure.string :as str]))
 
+(defn upper-case-chars []
+  (let [A (int \A)
+        Z (int \Z)]
+    (map char (range A Z))))
+
 (defspec produces-some-lines                                ;; the name of the test
          100                                                ;; the number of iterations for test.check to test
-         (prop/for-all [char (gen/fmap str/upper-case gen/char-alpha)]
+         (prop/for-all [char (gen/elements (upper-case-chars))]
                        (> (count (create char)) 0)))
