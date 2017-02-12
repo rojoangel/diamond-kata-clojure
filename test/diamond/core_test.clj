@@ -57,3 +57,12 @@
                              left-diamond (map first-half diamond)
                              right-diamond (map second-half diamond)]
                          (= left-diamond (map reverse right-diamond)))))
+
+(defspec rows-are-filled-with-blanks                        ;; the name of the test
+         100                                                ;; the number of iterations for test.check to test
+         (prop/for-all [char (gen/elements upper-case-chars)]
+                       (let [diamond (create char)
+                             top-right-diamond (map second-half (first-half diamond))]
+                         (every?
+                           (fn [line] (= (dec (count line)) (get (frequencies line) \space 0)))
+                           top-right-diamond))))
